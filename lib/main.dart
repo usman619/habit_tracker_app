@@ -11,19 +11,14 @@ void main() async {
   await HabitDatabase().saveFirstLaunch();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
-  runApp(
     MultiProvider(
       providers: [
-        //Theme Provider
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
         //Habit Database Provider
         ChangeNotifierProvider(create: (context) => HabitDatabase()),
+        //Theme Provider
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
+      child: const MyApp(),
     ),
   );
 }

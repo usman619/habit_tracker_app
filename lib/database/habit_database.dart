@@ -56,9 +56,9 @@ class HabitDatabase extends ChangeNotifier {
       await isar.writeTxn(
         () async {
           // If the habit is completed for the day, add it current habit to completedDates
-          if (isCompleted && !habit.completedDates.contains(DateTime.now())) {
+          if (isCompleted && !habit.completedDays.contains(DateTime.now())) {
             final today = DateTime.now();
-            habit.completedDates.add(
+            habit.completedDays.add(
               DateTime(
                 today.day,
                 today.month,
@@ -67,7 +67,7 @@ class HabitDatabase extends ChangeNotifier {
             );
           } else {
             // Else remove the tody's date date from completedDates
-            habit.completedDates.removeWhere(
+            habit.completedDays.removeWhere(
               (date) =>
                   date.day == DateTime.now().day &&
                   date.month == DateTime.now().month &&
