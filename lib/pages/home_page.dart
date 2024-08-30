@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Habit Tracker',
+          'Home',
           style: titleTextTheme,
         ),
         centerTitle: true,
@@ -25,8 +25,12 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Text(
           'Welcome to Habit Tracker',
-          style: bodyTextTheme(context),
+          style: bodyTextTheme,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add_task_sharp),
       ),
     );
   }

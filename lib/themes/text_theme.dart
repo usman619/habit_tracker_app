@@ -10,19 +10,18 @@ TextStyle titleTextTheme = TextStyle(
 
 TextStyle drawerTextTheme(BuildContext context) => TextStyle(
       fontFamily: GoogleFonts.firaCode().fontFamily,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.bold,
       letterSpacing: 2,
       fontSize: 16,
       color: Theme.of(context).colorScheme.primary,
     );
 
-TextStyle bodyTextTheme(BuildContext context) => TextStyle(
-      fontFamily: GoogleFonts.firaCode().fontFamily,
-      fontWeight: FontWeight.normal,
-      letterSpacing: 1,
-      fontSize: 16,
-      color: Theme.of(context).colorScheme.primary,
-    );
+TextStyle bodyTextTheme = TextStyle(
+  fontFamily: GoogleFonts.firaCode().fontFamily,
+  fontWeight: FontWeight.normal,
+  letterSpacing: 2,
+  fontSize: 16,
+);
 
 TextStyle loginTextTheme(BuildContext context) => TextStyle(
       fontFamily: GoogleFonts.firaCode().fontFamily,
