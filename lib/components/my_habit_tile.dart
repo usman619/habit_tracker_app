@@ -19,48 +19,55 @@ class MyHabitTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: const StretchMotion(),
-        children: [
-          SlidableAction(
-            onPressed: editHabit,
-            icon: Icons.edit,
-            backgroundColor: Colors.grey.shade500,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          SlidableAction(
-            onPressed: deleteHabit,
-            icon: Icons.delete,
-            backgroundColor: Colors.red,
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ],
-      ),
-      child: GestureDetector(
-        onTap: () {
-          if (onChanged != null) {
-            onChanged!(!isCompleted);
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
-          decoration: BoxDecoration(
-            color: isCompleted
-                ? Colors.green
-                : Theme.of(context).colorScheme.secondary,
-          ),
-          child: ListTile(
-            title: Text(
-              text,
-              style: bodyTextTheme,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const StretchMotion(),
+          children: [
+            SlidableAction(
+              onPressed: editHabit,
+              icon: Icons.edit,
+              backgroundColor: Colors.grey.shade500,
+              borderRadius: BorderRadius.circular(8),
             ),
-            leading: Checkbox(
-              value: isCompleted,
-              onChanged: onChanged,
-              activeColor: Colors.green,
-              checkColor: Colors.white,
+            SlidableAction(
+              onPressed: deleteHabit,
+              icon: Icons.delete,
+              backgroundColor: Colors.red,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ],
+        ),
+        child: GestureDetector(
+          onTap: () {
+            if (onChanged != null) {
+              onChanged!(!isCompleted);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: isCompleted
+                  ? Colors.green
+                  : Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: ListTile(
+              title: Text(
+                text,
+                style: bodyTextTheme.copyWith(
+                  color: isCompleted
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
+              leading: Checkbox(
+                value: isCompleted,
+                onChanged: onChanged,
+                activeColor: Colors.green,
+                checkColor: Colors.white,
+              ),
             ),
           ),
         ),

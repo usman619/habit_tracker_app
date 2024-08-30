@@ -60,23 +60,25 @@ class HabitDatabase extends ChangeNotifier {
             final today = DateTime.now();
             habit.completedDays.add(
               DateTime(
-                today.day,
-                today.month,
                 today.year,
+                today.month,
+                today.day,
               ),
             );
           } else {
             // Else remove the tody's date date from completedDates
             habit.completedDays.removeWhere(
               (date) =>
-                  date.day == DateTime.now().day &&
+                  date.year == DateTime.now().year &&
                   date.month == DateTime.now().month &&
-                  date.year == DateTime.now().year,
+                  date.day == DateTime.now().day,
             );
           }
+          await isar.habits.put(habit);
         },
       );
     }
+    readHabits();
   }
 
   // Update Habit Name

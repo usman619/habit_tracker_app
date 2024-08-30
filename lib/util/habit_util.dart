@@ -5,8 +5,8 @@ bool isHabitCompleted(List<DateTime> completedDates) {
 
   return completedDates.any(
     (date) =>
-        date.day == today.day &&
+        date.year == today.year &&
         date.month == today.month &&
-        date.year == today.year,
+        date.day == today.day,
   );
 }

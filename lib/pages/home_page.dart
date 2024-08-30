@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
     if (value != null) {
       context.read<HabitDatabase>().updateHabitCompletion(habit.id, value);
     }
+    setState(() {});
   }
 
   // Edit the habit
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
               habitController.clear();
             },
             child: Text(
-              'Update',
+              'Save',
               style: bodyTextTheme.copyWith(
                   color: Colors.green, fontWeight: FontWeight.bold),
             ),
@@ -110,6 +111,49 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  // Delete the habit
+  void deleteHabit(Habit habit) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(
+                'Delete Habit',
+                style: titleTextTheme.copyWith(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              content: Text(
+                'Are you sure you want to delete "${habit.name}"?',
+                style: bodyTextTheme,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: bodyTextTheme.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    context.read<HabitDatabase>().deleteHabit(habit.id);
+                  },
+                  child: Text(
+                    'Delete',
+                    style: bodyTextTheme.copyWith(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ],
+            ));
   }
 
   @override
@@ -127,6 +171,7 @@ class _HomePageState extends State<HomePage> {
       body: _buildHabitList(),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewHabit,
+        focusColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.add_task_sharp),
       ),
     );
@@ -144,8 +189,10 @@ class _HomePageState extends State<HomePage> {
         return MyHabitTile(
           text: habit.name,
           isCompleted: isCompletedToday,
-          onChanged: (value) => checkOffHabit(value, habit),
-          editHabit: editHabit(habit),
+          onChanged: (isCompletedToday) =>
+              checkOffHabit(isCompletedToday, habit),
+          editHabit: (context) => editHabit(habit),
+          deleteHabit: (context) => deleteHabit(habit),
         );
       },
     );
