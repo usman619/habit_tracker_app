@@ -17,7 +17,7 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50.0),
                 child: Icon(
-                  Icons.person,
+                  Icons.add_task_rounded,
                   size: 72,
                   color: Theme.of(context).colorScheme.primary,
                 ),

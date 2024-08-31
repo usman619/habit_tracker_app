@@ -14,9 +14,13 @@ void main() async {
     MultiProvider(
       providers: [
         //Habit Database Provider
-        ChangeNotifierProvider(create: (context) => HabitDatabase()),
+        ChangeNotifierProvider(
+          create: (context) => HabitDatabase(),
+        ),
         //Theme Provider
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
       ],
       child: const MyApp(),
     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_app/components/my_drawer.dart';
 import 'package:habit_tracker_app/components/my_habit_tile.dart';
+import 'package:habit_tracker_app/components/my_heat_map.dart';
 import 'package:habit_tracker_app/database/habit_database.dart';
 import 'package:habit_tracker_app/models/habit.dart';
 import 'package:habit_tracker_app/themes/text_theme.dart';
@@ -168,11 +169,22 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Theme.of(context).colorScheme.primary,
       ),
       drawer: const MyDrawer(),
-      body: _buildHabitList(),
+      body: ListView(
+        children: [
+          // HeatMap
+          _buildHeatMap(),
+          //Habiit List
+          _buildHabitList(),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewHabit,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         focusColor: Theme.of(context).colorScheme.secondary,
-        child: const Icon(Icons.add_task_sharp),
+        child: const Icon(
+          Icons.add,
+          size: 32,
+        ),
       ),
     );
   }
@@ -183,6 +195,8 @@ class _HomePageState extends State<HomePage> {
 
     return ListView.builder(
       itemCount: habits.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         final habit = habits[index];
         bool isCompletedToday = isHabitCompleted(habit.completedDays);
@@ -194,6 +208,25 @@ class _HomePageState extends State<HomePage> {
           editHabit: (context) => editHabit(habit),
           deleteHabit: (context) => deleteHabit(habit),
         );
+      },
+    );
+  }
+
+  Widget _buildHeatMap() {
+    final habitsDatabase = context.watch<HabitDatabase>();
+    List<Habit> currentHabits = habitsDatabase.currentHabits;
+
+    return FutureBuilder<DateTime?>(
+      future: habitsDatabase.getFirstLaunchDate(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return MyHeatMap(
+            startDate: snapshot.data!,
+            dataset: prepareHeatMapDataset(currentHabits),
+          );
+        } else {
+          return Container();
+        }
       },
     );
   }
