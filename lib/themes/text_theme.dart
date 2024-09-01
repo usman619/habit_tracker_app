@@ -23,6 +23,13 @@ TextStyle bodyTextTheme = TextStyle(
   fontSize: 16,
 );
 
+TextStyle heatMapTextTheme = TextStyle(
+  fontFamily: GoogleFonts.firaCode().fontFamily,
+  fontWeight: FontWeight.normal,
+  letterSpacing: 2,
+  fontSize: 12,
+);
+
 TextStyle loginTextTheme(BuildContext context) => TextStyle(
       fontFamily: GoogleFonts.firaCode().fontFamily,
       fontWeight: FontWeight.bold,
