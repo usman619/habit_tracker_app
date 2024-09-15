@@ -48,7 +48,7 @@ The app icon is made using the following websites:
 - [App Icon Generator](https://www.appicon.co/)
 - [Icon Monstr](https://iconmonstr.com/)
 
-<img src="assets/app_icon.png" alt="app_icon" width="512" height="512" >
+<img src="assets/app_icon.png" alt="app_icon" width="300" height="300" >
 
 ## UI Screens
 
